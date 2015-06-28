@@ -6,14 +6,17 @@ class Api::V1::GroupEventsController < ApplicationController
 
   before_action :find_group_event, except: [:index, :create]
 
+  # GET /group_events.json
   def index
     render json: GroupEvent.all
   end
 
+  # GET /group_events/:id.json
   def show
     render json: @group_event, root: false
   end
 
+  # POST /group_events.json
   def create
     # with authentication the first line of this method
     # would be the line bellow instead of the actual one
@@ -29,6 +32,7 @@ class Api::V1::GroupEventsController < ApplicationController
     end
   end
 
+  # PUT /group_events/:id.json
   def update
     @group_event.assign_attributes(group_event_attrs.merge(user_id: 1))
     
@@ -39,6 +43,7 @@ class Api::V1::GroupEventsController < ApplicationController
     end
   end
 
+  # DELETE /group_events/:id.json
   def destroy
     @group_event.mark_as_removed!
     head :no_content

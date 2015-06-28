@@ -18,12 +18,12 @@ class GroupEvent < ActiveRecord::Base
   # - Methods
   # Public: tests whether an EventGroup can be considered as published
   # 
-  # Returns true if is all base attributes are present, false if not.
+  # Returns true if all base attributes are present, false if not.
   def published?
     all_base_attributes_present?
   end
   
-  # Public: set to true the :removed attribute and save
+  # Public: set to true and update the :removed attribute
   # 
   # returns nothing.
   def mark_as_removed!
@@ -41,7 +41,7 @@ class GroupEvent < ActiveRecord::Base
       self.end_on = self.start_on + self.duration if start_on? && duration? && !end_on?
     end
 
-    # Private: Ensure there is at least one of the base attributes to create/update a GroupEvent.
+    # Private: Ensure there is at least one base attribute present.
     #
     # Returns nothing.
     def any_base_attribute_present
