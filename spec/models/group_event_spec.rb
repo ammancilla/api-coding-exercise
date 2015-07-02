@@ -5,9 +5,8 @@ RSpec.describe GroupEvent, type: :model do
   describe "#mark_as_removed!" do
     it "set to true and update the :removed attribute" do
       ge = create(:group_event)
-      ge.mark_as_removed!
 
-      expect(ge.removed).to be_truthy
+      expect { ge.mark_as_removed! }.to change{ ge.removed }.from(false).to(true)
     end
   end
 
